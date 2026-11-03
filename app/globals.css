@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-white text-slate-900 dark:bg-brand-dark dark:text-brand-text transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-slate-900 dark:text-brand-text;
+  }
+
+  .glass-card {
+    @apply bg-white/80 dark:bg-brand-primary/80 backdrop-blur-md border border-white/20 dark:border-brand-dark/30 rounded-xl shadow-lg;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
