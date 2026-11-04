@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Send } from 'lucide-react';
 import { BRANCHES } from '@/lib/data';
 
@@ -9,26 +10,47 @@ export default function ContactForm() {
     name: '',
     email: '',
     phone: '',
-    branch: 'gauteng',
+    branch: 'gautenghq',
     service: '',
     message: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    setError('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, terms: true }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        setError(result.error || 'We could not send your message. Please try again.');
+        return;
+      }
+
       setSubmitted(true);
-    }, 1500);
+    } catch (requestError) {
+      console.error('Contact form request failed:', requestError);
+      setError('We could not reach the server. Please try again later.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const selectedBranch = BRANCHES.find((b) => b.name.toLowerCase().includes(formData.branch)) || BRANCHES[0];
+  const selectedBranch = BRANCHES.find(
+    (branch) => branch.name.toLowerCase().replace(/\s+/g, '') === formData.branch,
+  ) || BRANCHES[0];
 
   if (submitted) {
     return (
@@ -59,6 +81,8 @@ export default function ContactForm() {
             placeholder="John Doe"
             className="w-full px-4 py-3 bg-white dark:bg-brand-primary border border-white/30 dark:border-brand-dark/30 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             required
+            maxLength={100}
+            autoComplete="name"
           />
         </div>
 
@@ -72,6 +96,8 @@ export default function ContactForm() {
             placeholder="john@example.com"
             className="w-full px-4 py-3 bg-white dark:bg-brand-primary border border-white/30 dark:border-brand-dark/30 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             required
+            maxLength={254}
+            autoComplete="email"
           />
         </div>
 
@@ -85,6 +111,8 @@ export default function ContactForm() {
             placeholder="+27 73 000 0000"
             className="w-full px-4 py-3 bg-white dark:bg-brand-primary border border-white/30 dark:border-brand-dark/30 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             required
+            maxLength={50}
+            autoComplete="tel"
           />
         </div>
 
@@ -134,6 +162,9 @@ export default function ContactForm() {
             onChange={handleChange}
             placeholder="Tell us about your project..."
             className="w-full px-4 py-3 bg-white dark:bg-brand-primary border border-white/30 dark:border-brand-dark/30 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+            required
+            maxLength={5000}
+            minLength={10}
           />
         </div>
       </div>
@@ -141,12 +172,22 @@ export default function ContactForm() {
       <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
         <input
           id="terms"
+          name="terms"
           type="checkbox"
           className="w-4 h-4 text-blue-600 dark:text-blue-400 bg-white dark:bg-brand-primary border border-white/30 dark:border-brand-dark/30 rounded focus:ring-blue-500"
           required
         />
-        <label htmlFor="terms">I agree to the terms and privacy policy</label>
+        <label htmlFor="terms">
+          I agree to the <Link className="text-blue-600 underline dark:text-blue-400" href="/legal/terms">terms</Link>
+          {' '}and <Link className="text-blue-600 underline dark:text-blue-400" href="/legal/privacy">privacy policy</Link>
+        </label>
       </div>
+
+      {error && (
+        <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+          {error}
+        </p>
+      )}
 
       <button
         type="submit"

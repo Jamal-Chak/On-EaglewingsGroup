@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, Phone, Instagram, Linkedin, X, Facebook } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import { COMPANY } from '@/lib/data';
 
 export default function Footer() {
@@ -16,11 +16,11 @@ export default function Footer() {
               <span className="text-xl font-bold text-slate-900 dark:text-white">ON-Eaglewings</span>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">{COMPANY.description}</p>
-            <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 rounded-full bg-slate-100 dark:bg-brand-primary flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-blue-600 hover:text-white transition-colors"><Facebook className="w-4 h-4" /></a>
-              <a href="#" className="w-9 h-9 rounded-full bg-slate-100 dark:bg-brand-primary flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-blue-600 hover:text-white transition-colors"><X className="w-4 h-4" /></a>
-              <a href="#" className="w-9 h-9 rounded-full bg-slate-100 dark:bg-brand-primary flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-blue-600 hover:text-white transition-colors"><Instagram className="w-4 h-4" /></a>
-              <a href="#" className="w-9 h-9 rounded-full bg-slate-100 dark:bg-brand-primary flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-blue-600 hover:text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
+            <div>
+              <a href={`mailto:${COMPANY.email}`} className="inline-flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                <Mail className="w-4 h-4" />
+                Email our team
+              </a>
             </div>
           </div>
           <div>
@@ -44,8 +44,8 @@ export default function Footer() {
               <li><Link href="/about" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About Us</Link></li>
               <li><Link href="/projects" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</Link></li>
               <li><Link href="/contact" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</Link></li>
-              <li><a href="#" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">ISO Standards</a></li>
-              <li><a href="#" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Careers</a></li>
+              <li><Link href="/company/standards" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Quality Standards</Link></li>
+              <li><Link href="/company/careers" className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Careers</Link></li>
             </ul>
           </div>
           <div>
@@ -53,11 +53,11 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
                 <Phone className="w-4 h-4 mt-0.5" />
-                <div><div className="text-slate-900 dark:text-white font-medium">Gauteng HQ</div><div>{COMPANY.phoneSA}</div></div>
+                <div><div className="text-slate-900 dark:text-white font-medium">Gauteng HQ</div><a href={`tel:${COMPANY.phoneSA}`} className="hover:text-blue-600 dark:hover:text-blue-400">{COMPANY.phoneSA}</a></div>
               </li>
               <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
                 <Phone className="w-4 h-4 mt-0.5" />
-                <div><div className="text-slate-900 dark:text-white font-medium">Harare Branch</div><div>{COMPANY.phoneZim}</div></div>
+                <div><div className="text-slate-900 dark:text-white font-medium">Harare Branch</div><a href={`tel:${COMPANY.phoneZim}`} className="hover:text-blue-600 dark:hover:text-blue-400">{COMPANY.phoneZim}</a></div>
               </li>
               <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
                 <Mail className="w-4 h-4 mt-0.5" />
@@ -70,9 +70,8 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-3">
             <p className="text-sm text-slate-500 dark:text-slate-400">© {y} ON-Eaglewings Group. All rights reserved.</p>
             <div className="flex gap-5">
-              <Link href="#" className="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacy Policy</Link>
-              <Link href="#" className="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Terms of Service</Link>
-              <Link href="#" className="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Sitemap</Link>
+              <Link href="/legal/privacy" className="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacy Policy</Link>
+              <Link href="/legal/terms" className="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>

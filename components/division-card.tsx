@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ServiceType } from '@/lib/data';
 
@@ -11,6 +12,15 @@ export default function DivisionCard({ service }: { service: ServiceType }) {
         whileHover={{ y: -8 }}
         className="group relative glass-card overflow-hidden"
       >
+        <div className="absolute inset-0">
+          <Image
+            src={service.image}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover opacity-25 transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         <div className="relative z-10 h-48 flex items-center justify-center">
           <div className="w-16 h-16 bg-blue-600/20 backdrop-blur-md rounded-full flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">

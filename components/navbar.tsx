@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, MapPin, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -17,7 +17,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const stored = localStorage.getItem('darkMode');
@@ -99,7 +98,7 @@ export default function Navbar() {
       )}
 
       {isOpen && (
-        <div className="fixed inset-y-0 left-0 z-50 w-full md:w-80 bg-white dark:bg-brand-dark border-r border-white/20 dark:border-brand-dark/30 transform transition-transform duration-300 -translate-x-full md:translate-x-0">
+        <div className={`fixed inset-y-0 left-0 z-50 w-full md:w-80 bg-white dark:bg-brand-dark border-r border-white/20 dark:border-brand-dark/30 transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className="flex items-center justify-between p-6 border-b border-white/20 dark:border-brand-dark/30">
             <Link href="/" className="text-xl font-bold text-slate-900 dark:text-white">
               ON-Eaglewings

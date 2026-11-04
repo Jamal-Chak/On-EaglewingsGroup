@@ -1,0 +1,17 @@
+{
+  "name": "ON-Eaglewings Group",
+  "short_name": "ON-Eaglewings",
+  "description": "Construction, engineering, finishes, and renewable energy across South Africa and Zimbabwe.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b172b",
+  "theme_color": "#0b172b",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     locale: 'en_ZA',
     siteName: 'ON-Eaglewings Group',
   },
+  icons: {
+    icon: '/icon.svg',
+  },
   manifest: '/site.webmanifest',
 };
 

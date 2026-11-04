@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Download, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import type { ProjectType } from '@/lib/data';
@@ -13,7 +14,13 @@ export default function ProjectCard({ project }: { project: ProjectType }) {
         className="group relative glass-card overflow-hidden cursor-pointer"
       >
         <div className="relative h-64 overflow-hidden">
-          <div className="absolute inset-0 bg-slate-200 dark:bg-brand-primary animate-pulse" />
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 shadow-lg">
               <ExternalLink className="w-6 h-6" />
