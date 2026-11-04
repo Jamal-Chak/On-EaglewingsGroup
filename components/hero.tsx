@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { COMPANY, SERVICES } from '@/lib/data';
@@ -18,9 +19,16 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark dark:bg-black">
       <div className="absolute inset-0 z-0">
-        <canvas className="w-full h-full" id="particle-canvas" />
+        <Image
+          src="/images/projects/ortambo.svg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-45"
+        />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-black/80 z-10" />
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center h-full">
         <div className="text-center max-w-4xl">
           <motion.div
