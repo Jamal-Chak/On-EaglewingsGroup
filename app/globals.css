@@ -18,6 +18,12 @@
   body {
     @apply bg-white text-slate-900 dark:bg-brand-dark dark:text-brand-text transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image:
+      linear-gradient(rgba(11, 17, 32, 0.94), rgba(11, 17, 32, 0.94)),
+      url('/images/projects/ortambo.webp');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
   }
 
   h1, h2, h3, h4, h5, h6 {

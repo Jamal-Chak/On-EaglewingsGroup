@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
+import PageHero from '@/components/page-hero';
 import ContactForm from '@/components/contact-form';
 import { BRANCHES } from '@/lib/data';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
@@ -9,8 +10,7 @@ export default function ContactPage() {
   return (
     <div className="relative">
       <Navbar />
-      <section className="py-24 bg-brand-dark dark:bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <PageHero>
           <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-500/10 rounded-full mb-6">
             Contact
           </span>
@@ -20,8 +20,7 @@ export default function ContactPage() {
           <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Ready to start your project? Reach out to our Gauteng HQ or Harare Branch for expert consultation.
           </p>
-        </div>
-      </section>
+      </PageHero>
 
       <section className="py-20 bg-white dark:bg-brand-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

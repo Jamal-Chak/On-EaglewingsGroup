@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { Building, Download, MapPin } from 'lucide-react';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
+import PageHero from '@/components/page-hero';
 import { PROJECTS } from '@/lib/data';
 
 export default function ProjectsPage() {
@@ -16,8 +18,7 @@ export default function ProjectsPage() {
   return (
     <div className="relative">
       <Navbar />
-      <section className="py-24 bg-brand-dark dark:bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <PageHero>
           <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-500/10 rounded-full mb-6">
             Projects
           </span>
@@ -28,8 +29,7 @@ export default function ProjectsPage() {
             A showcase of our major architectural projects across South Africa and Zimbabwe, including the
             flagship O.R. Tambo Airport Fire Escape Staircase.
           </p>
-        </div>
-      </section>
+      </PageHero>
 
       <section className="py-20 bg-white dark:bg-brand-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,8 +60,24 @@ export default function ProjectsPage() {
                   className="group relative glass-card overflow-hidden"
                 >
                   <div className="relative h-72 overflow-hidden">
-                    <div className="absolute inset-0 bg-slate-200 dark:bg-brand-primary animate-pulse" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-black/20" />
+                    <a
+                      href={project.downloadUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Download case study for ${project.title}`}
+                      className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-lg border border-white/20 bg-slate-950/75 px-3 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition-colors hover:bg-blue-600"
+                    >
+                      <Download className="h-4 w-4" />
+                      Case study
+                    </a>
                     <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-transparent to-transparent">
                       <div className="flex items-center justify-between gap-4">
                         <div>
@@ -70,15 +86,9 @@ export default function ProjectsPage() {
                           </span>
                           <h2 className="text-lg font-bold text-white mt-1">{project.title}</h2>
                         </div>
-                        <a
-                          href={project.downloadUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Download case study for ${project.title}`}
-                          className="p-3 bg-white text-slate-900 rounded-lg hover:bg-blue-500 hover:text-white transition-all"
-                        >
-                          <Download className="w-5 h-5" />
-                        </a>
+                        <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                          Featured project
+                        </span>
                       </div>
                       <div className="mt-4 flex items-center gap-4 text-xs text-slate-300">
                         <span className="flex items-center gap-1">
@@ -122,17 +132,34 @@ export default function ProjectsPage() {
               Technical case studies are available for download. Each includes detailed specifications,
               load ratings, and engineering drawings.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {PROJECTS.map((project) => (
                 <a
                   key={project.id}
                   href={project.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-4 bg-white text-slate-900 border border-white/30 dark:border-brand-dark/30 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-brand-primary/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center justify-center gap-2"
+                  className="group overflow-hidden rounded-xl border border-white/10 bg-white/5 text-left shadow-lg transition-all hover:-translate-y-1 hover:border-blue-400/50 hover:bg-white/10"
                 >
-                  <Download className="w-4 h-4" />
-                  {project.title}
+                  <div className="relative h-40 overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-slate-900 shadow-md">
+                      <Download className="h-3.5 w-3.5" />
+                      Download
+                    </span>
+                  </div>
+                  <div className="p-4">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">{project.category}</span>
+                    <h3 className="mt-1 font-semibold text-white">{project.title}</h3>
+                    <p className="mt-1 text-sm text-slate-400">{project.location}</p>
+                  </div>
                 </a>
               ))}
             </div>

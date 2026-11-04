@@ -20,15 +20,15 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark pt-20 dark:bg-black">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/projects/ortambo.svg"
+          src="/images/background/engineering.webp"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-20"
+          className="object-cover opacity-50"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/85 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70 z-10" />
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center h-full">
         <div className="text-center max-w-4xl">
           <motion.div

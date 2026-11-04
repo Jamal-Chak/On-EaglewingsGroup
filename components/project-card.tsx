@@ -21,6 +21,11 @@ export default function ProjectCard({ project }: { project: ProjectType }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+          <span className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-lg border border-white/20 bg-slate-950/75 px-3 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur-md">
+            <Download className="h-4 w-4" />
+            Case study
+          </span>
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 shadow-lg">
               <ExternalLink className="w-6 h-6" />

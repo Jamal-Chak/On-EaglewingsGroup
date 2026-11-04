@@ -17,4 +17,4 @@ Use `.env.example` as the variable-name template. Do not commit `.env.local` or 
 
 ## Content that still needs approval
 
-The SVG illustrations are original placeholders, not photographs of company work. The PDFs in `public/pdfs/` are explicitly marked preliminary placeholders and must be replaced with approved case studies before publication. Review the draft privacy and terms pages with the company and local counsel, and provide official social-profile URLs before adding social links.
+The images in `public/images/` are locally hosted Unsplash stock photographs. They are illustrative and do not document ON-Eaglewings Group projects; replace them with approved company photography before presenting them as completed work. See the [Unsplash license](https://unsplash.com/license). The PDFs in `public/pdfs/` are explicitly marked preliminary placeholders and must be replaced with approved case studies before publication. Review the draft privacy and terms pages with the company and local counsel, and provide official social-profile URLs before adding social links.
