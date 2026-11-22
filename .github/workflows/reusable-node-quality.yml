@@ -1,0 +1,58 @@
+name: Reusable Node.js Quality Checks
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Node.js version
+        required: false
+        type: string
+        default: "20"
+      run-typecheck:
+        description: Run TypeScript validation
+        required: false
+        type: boolean
+        default: true
+      run-lint:
+        description: Run the repository lint script
+        required: false
+        type: boolean
+        default: true
+      run-build:
+        description: Run the production build
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Typecheck, lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: TypeScript validation
+        if: inputs.run-typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint
+        if: inputs.run-lint
+        run: npm run lint
+
+      - name: Production build
+        if: inputs.run-build
+        run: npm run build
